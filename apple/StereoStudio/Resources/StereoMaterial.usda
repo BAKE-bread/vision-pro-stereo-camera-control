@@ -1,0 +1,38 @@
+#usda 1.0
+(
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+def Xform "Root" {
+    def Material "StereoMaterial" {
+        asset inputs:LeftImage
+        asset inputs:RightImage
+        token outputs:mtlx:surface.connect = </Root/StereoMaterial/Surface.outputs:out>
+        def Shader "Left" {
+            uniform token info:id = "ND_image_color3"
+            asset inputs:file.connect = </Root/StereoMaterial.inputs:LeftImage>
+            color3f outputs:out
+        }
+        def Shader "Right" {
+            uniform token info:id = "ND_image_color3"
+            asset inputs:file.connect = </Root/StereoMaterial.inputs:RightImage>
+            color3f outputs:out
+        }
+        def Shader "Camera" {
+            uniform token info:id = "ND_realitykit_geometry_switch_cameraindex_color3"
+            color3f inputs:left.connect = </Root/StereoMaterial/Left.outputs:out>
+            color3f inputs:right.connect = </Root/StereoMaterial/Right.outputs:out>
+            color3f inputs:mono.connect = </Root/StereoMaterial/Left.outputs:out>
+            color3f outputs:out
+        }
+        def Shader "Surface" {
+            uniform token info:id = "ND_realitykit_unlit_surfaceshader"
+            color3f inputs:color.connect = </Root/StereoMaterial/Camera.outputs:out>
+            float inputs:opacity = 1
+            bool inputs:applyPostProcessToneMap = false
+            token outputs:out
+        }
+    }
+}
+

@@ -1,0 +1,27 @@
+{
+  "confirmed_position_mode": false,
+  "port": "COM3",
+  "baud": 57600,
+  "yaw": {
+    "id": 11,
+    "center_tick": 2048,
+    "min_tick": 1400,
+    "max_tick": 2700,
+    "sign": 1,
+    "ticks_per_degree": 11.3777778,
+    "model_number": 1020,
+    "profile_velocity": 20,
+    "profile_acceleration": 5
+  },
+  "pitch": {
+    "id": 10,
+    "center_tick": 2048,
+    "min_tick": 1750,
+    "max_tick": 2350,
+    "sign": 1,
+    "ticks_per_degree": 11.3777778,
+    "model_number": 1020,
+    "profile_velocity": 20,
+    "profile_acceleration": 5
+  }
+}
